@@ -17,66 +17,99 @@
 
 
 // 1) definire un array di oggetti che rappresentano i membri del team. 
-// 2) // Ogni membro ha le informazioni necessarie per stampare la relativa card: Nome, Ruolo e Foto.
+// 2) Ogni membro ha le informazioni necessarie per stampare la relativa card: Nome, Ruolo e Foto.
 // 3) stampare dinamicamente una card per ogni membro del team. 
 
 
 // VARIABILI GLOBALI 
-let img = document.querySelector(".card-image img");
-let namePerson = document.querySelector(".card-text h3");
-let ruoloPerson = document.querySelector(".card-text p");
+// let img = document.querySelector(".card-image img");
+// let namePerson = document.querySelector(".card-text h3");
+// let ruoloPerson = document.querySelector(".card-text p");
 
-
-// console.log(ruoloPerson);
 
 
 
 // 1) definire un array di oggetti che rappresentano i membri del team. 
 
-let team = [
+const teamMembers = [
+    //Barnett
     {
-        Barnett: {
-            immagine:"img/wayne-barnett-founder-ceo.jpg",
-            nome: "Wayne ",
-            cognome: "Barnett",
-            ruolo: "Founder & CEO",
-        },
-        Caroll: {
-            immagine:"img/angela-caroll-chief-editor.jpg",
-            nome: "Angela",
-            cognome: "Caroll",
-            ruolo: "Chief Editor",
-        },
-        Gordon: {
-            immagine:"img/walter-gordon-office-manager.jpg",
-            nome: "Walter",
-            cognome: "Gordon",
-            ruolo: "Office Manager",
-        },
-        Lopez: {
-            immagine: " ",
-            nome: "Angela",
-            cognome: "Lopez",
-            ruolo: "img/angela-lopez-social-media-manager.jpg",
-        },
-        Estrada: {
-            immagine:"img/scott-estrada-developer.jpg",
-            nome: "Scott",
-            cognome: "Estrada",
-            ruolo: "Developer",
-        },
-        Ramos:{
-            immagine:"img/barbara-ramos-graphic-designer.jpg",
-            nome: "Barbara",
-            cognome: "Ramos",
-            ruolo: "Graphic Designer",
-        },
+        immagine:"img/wayne-barnett-founder-ceo.jpg",
+        nome: "Wayne ",
+        cognome: "Barnett",
+        ruolo: "Founder & CEO",
+    },
+    // Caroll:
+    {
+        immagine:"img/angela-caroll-chief-editor.jpg",
+        nome: "Angela",
+        cognome: "Caroll",
+        ruolo: "Chief Editor",
+    },
+    // Gordon:
+    {
+        immagine:"img/walter-gordon-office-manager.jpg",
+        nome: "Walter",
+        cognome: "Gordon",
+        ruolo: "Office Manager",
+    },
+    // Lopez:
+    {
+        immagine: "img/angela-lopez-social-media-manager.jpg",
+        nome: "Angela",
+        cognome: "Lopez",
+        ruolo: "Social Media Manager",
+    },
+    // Estrada:
+    {
+        immagine:"img/scott-estrada-developer.jpg",
+        nome: "Scott",
+        cognome: "Estrada",
+        ruolo: "Developer",
+    },
+    // Ramos:
+    {
+        immagine:"img/barbara-ramos-graphic-designer.jpg",
+        nome: "Barbara",
+        cognome: "Ramos",
+        ruolo: "Graphic Designer",
     }
 ];
-console.log(team)
+
+// console.log(teamMembers);  // bracket notation
+
+
+// 2) // Ogni membro ha le informazioni necessarie per stampare la relativa card: Nome, Ruolo e Foto.
+
+let teamContainer = document.querySelector(".team-container");
+// console.log(teamContainer);
+teamContainer.removeChild(teamContainer.firstElementChild);
 
 
 
-person = document.querySelector(".team-card");
-console.log(person);
+// 2.1) creiamo le card con un ciclo per stampare le card
+for(let i = 0; i < teamMembers.length; i++){
+    let removeCard = document.querySelector('.team-card');  // rimuovo l'elemento creato in html
+    console.log(removeCard)
+
+    // creo una variabile per le card
+    let card = document.createElement("div");
+    console.log(card);
+    card.setAttribute("class", "team-card");
+    teamContainer.append(card);
+    card.innerHTML = `
+        <div class="team-card">
+            <div class="card-image">
+              <img
+                src="${teamMembers[i].immagine}"
+                alt="Wayne Barnett"
+              />
+            </div>
+            <div class="card-text">
+              <h3>${teamMembers[i].nome} + ${teamMembers[i].cognome}</h3>
+              <p>${teamMembers[i].ruolo}</p>
+            </div>
+    `;
+}
+
 
