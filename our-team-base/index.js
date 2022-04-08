@@ -32,7 +32,7 @@
 // 1) definire un array di oggetti che rappresentano i membri del team. 
 
 const teamMembers = [
-    //Barnett
+    //Barnett:
     {
         immagine:"img/wayne-barnett-founder-ceo.jpg",
         nome: "Wayne ",
@@ -76,40 +76,56 @@ const teamMembers = [
     }
 ];
 
-// console.log(teamMembers);  // bracket notation
+
+const teamContainer = document.querySelector(".team-container");
+
+function stampaTeam() {  // funzione per stampare tutti gli oggetti 
+
+    teamContainer.removeChild(teamContainer.firstElementChild);  // rimuovo il primo elemento
+
+    for(let i = 0; i < teamMembers.length; i++) {
+        stampaMembers(teamMembers[i]);    // funzione per stampare un singolo oggetto
+    }
+}
+stampaTeam();
 
 
-// 2) // Ogni membro ha le informazioni necessarie per stampare la relativa card: Nome, Ruolo e Foto.
-
-let teamContainer = document.querySelector(".team-container");
-// console.log(teamContainer);
-teamContainer.removeChild(teamContainer.firstElementChild);
-
-
-
-// 2.1) creiamo le card con un ciclo per stampare le card
-for(let i = 0; i < teamMembers.length; i++){
-    let removeCard = document.querySelector('.team-card');  // rimuovo l'elemento creato in html
-    console.log(removeCard)
-
-    // creo una variabile per le card
-    let card = document.createElement("div");
-    console.log(card);
-    card.setAttribute("class", "team-card");
-    teamContainer.append(card);
-    card.innerHTML = `
-        <div class="team-card">
-            <div class="card-image">
-              <img
-                src="${teamMembers[i].immagine}"
-                alt="Wayne Barnett"
-              />
+function stampaMembers(member){
+    console.log(member)
+    const card = document.createElement('div');
+    card.setAttribute('class', 'team-card');
+    const cardContainer = `
+            <div class= "card-image">
+                <img src= "${member.immagine}"
+                 alt= "Wayne Barnett"/>             
             </div>
-            <div class="card-text">
-              <h3>${teamMembers[i].nome} + ${teamMembers[i].cognome}</h3>
-              <p>${teamMembers[i].ruolo}</p>
+             <div class="card-text">
+               <h3>${member.nome} ${member.cognome}</h3>
+                  <p>${member.ruolo}</p>
             </div>
-    `;
+       `;
+
+       card.innerHTML = cardContainer;
+       teamContainer.appendChild(card);
 }
 
 
+const button = document.getElementById("addMemberButton");
+button.addEventListener("click", addMember);
+
+function addMember(){
+    const nome = document.getElementById("name").value;
+    const cognome = document.getElementById("lastName").value;
+    const ruolo = document.getElementById("role").value;     // prendo i valori inseriti dall'utente
+    const image = document.getElementById("image").value;
+    
+    const newMember = {
+        nome:nome,
+        cognome: cognome,
+        ruolo:ruolo,
+        immagine:image,
+    }
+    teamMembers.push(newMember);
+    console.log(teamMembers);
+    stampaMembers(newMember);
+}
